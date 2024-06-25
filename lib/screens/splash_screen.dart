@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:coinone_gallery/screens/login_screen.dart';
 import 'package:coinone_gallery/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const LoginScreen(),
+            builder: (context) => const SignupScreen(),
           ));
     });
   }
