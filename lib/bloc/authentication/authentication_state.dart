@@ -5,8 +5,12 @@ sealed class AuthenticationState {}
 
 final class AuthenticationInitial extends AuthenticationState {}
 
-final class AuthenticationLoadingState extends AuthenticationState{}
+final class AuthenticationLoadingState extends AuthenticationState {}
 
-final class AuthenticationErrorState extends AuthenticationState{}
+final class AuthenticationErrorState extends AuthenticationState {
+  final String error;
 
-final class AuthenticationSuccessState extends AuthenticationState{}
+  AuthenticationErrorState({required this.error});
+}
+
+final class AuthenticationSuccessState extends AuthenticationState {}
