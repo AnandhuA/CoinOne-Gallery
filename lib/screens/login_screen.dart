@@ -5,10 +5,10 @@ import 'package:coinone_gallery/screens/home_screen.dart';
 import 'package:coinone_gallery/screens/signup_screen.dart';
 import 'package:coinone_gallery/widgets/check_box_widget.dart';
 import 'package:coinone_gallery/widgets/custom_button.dart';
+import 'package:coinone_gallery/widgets/custom_rich_text.dart';
 import 'package:coinone_gallery/widgets/custom_snacbar.dart';
 import 'package:coinone_gallery/widgets/loading_button.dart';
 import 'package:coinone_gallery/widgets/text_field_widget.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeScreen(),
+                builder: (context) => const HomeScreen(),
               ),
               (route) => false,
             );
@@ -92,30 +92,10 @@ class LoginScreen extends StatelessWidget {
                             },
                           ),
                     height20,
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Don't have an account?  ",
-                          style: TextStyle(color: Colors.grey),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'SignUp',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SignupScreen(),
-                                    ),
-                                  );
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
+                     CustomRichText(
+                      text: "Don't have an account?  ",
+                      linkText: 'SignUp' ,
+                      screen: SignupScreen(),
                     ),
                   ],
                 ),

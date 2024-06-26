@@ -3,10 +3,10 @@ import 'package:coinone_gallery/bloc/authentication/authentication_bloc.dart';
 import 'package:coinone_gallery/core/const_size.dart';
 import 'package:coinone_gallery/screens/login_screen.dart';
 import 'package:coinone_gallery/widgets/custom_button.dart';
+import 'package:coinone_gallery/widgets/custom_rich_text.dart';
 import 'package:coinone_gallery/widgets/custom_snacbar.dart';
 import 'package:coinone_gallery/widgets/loading_button.dart';
 import 'package:coinone_gallery/widgets/text_field_widget.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -95,30 +95,10 @@ class SignupScreen extends StatelessWidget {
                             },
                           ),
                     height20,
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Already have an account?  ",
-                          style: const TextStyle(color: Colors.grey),
-                          children: <TextSpan>[
-                            TextSpan(
-                              text: 'Login',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => LoginScreen(),
-                                    ),
-                                  );
-                                },
-                            ),
-                          ],
-                        ),
-                      ),
+                    CustomRichText(
+                      text: "Already have an account?  ",
+                      linkText: 'Login',
+                      screen: LoginScreen(),
                     ),
                   ],
                 ),

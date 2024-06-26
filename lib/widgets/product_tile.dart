@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:coinone_gallery/core/colors.dart';
 import 'package:coinone_gallery/core/const_size.dart';
 import 'package:coinone_gallery/models/product_model.dart';
 import 'package:coinone_gallery/network/urls.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ProductTileWidget extends StatelessWidget {
   final ProductModel product;
@@ -12,9 +14,9 @@ class ProductTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey.shade700),
-      ),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: buttonBgColor),
+          color: bgColor),
       child: Column(
         children: [
           Expanded(
@@ -37,8 +39,9 @@ class ProductTileWidget extends StatelessWidget {
                   fit: BoxFit.fill,
                   imageUrl: "${Urls.imageUrl}${product.imgUrlPath}",
                   placeholder: (context, url) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return Lottie.asset(
+                      "assets/imgLoading.json",
+                  
                     );
                   },
                   errorWidget: (context, url, error) => const Icon(Icons.error),

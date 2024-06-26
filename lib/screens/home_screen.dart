@@ -30,20 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              confirmationDiloge(
-                  context: context,
-                  title: "Confirm Logout",
-                  confirmBtn: () {
-                    clearUserSession();
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => LoginScreen(),
-                      ),
-                      (route) => false,
-                    );
-                  },
-                  content: "Are you sure you want to log out?");
+              logOutButtonOntap(context);
             },
             icon: const Icon(Icons.logout),
           )
@@ -53,52 +40,58 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ProductLoadingState) {
-            return GridView.builder(
-              itemCount: 10,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                childAspectRatio: 0.65,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: GridView.builder(
+                itemCount: 10,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 0.65,
+                ),
+                itemBuilder: (context, index) {
+                  return const ShimmerProductTileWidget();
+                },
               ),
-              itemBuilder: (context, index) {
-                return const ShimmerProductTileWidget();
-              },
             );
           } else if (state is ProductSuccesState) {
             return state.productModelList.isEmpty
                 ? const Center(
                     child: Text("No Iteams"),
                   )
-                : GridView.builder(
-                    itemCount: state.productModelList.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 0.65,
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      itemCount: state.productModelList.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 0.65,
+                      ),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () {
+                            context.read<ProductDetailBloc>().add(
+                                  ProductClickEvent(
+                                    product: state.productModelList[index],
+                                  ),
+                                );
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DetailsScreen(),
+                                ));
+                          },
+                          child: ProductTileWidget(
+                            product: state.productModelList[index],
+                          ),
+                        );
+                        //  return ShimmerProductTileWidget();
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          context.read<ProductDetailBloc>().add(
-                                ProductClickEvent(
-                                  product: state.productModelList[index],
-                                ),
-                              );
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DetailsScreen(),
-                              ));
-                        },
-                        child: ProductTileWidget(
-                          product: state.productModelList[index],
-                        ),
-                      );
-                      //  return ShimmerProductTileWidget();
-                    },
                   );
           } else if (state is ProductErrorState) {
             return Center(
@@ -111,6 +104,24 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
       ),
+    );
+  }
+
+  logOutButtonOntap(BuildContext context) {
+    confirmationDiloge(
+      context: context,
+      title: "Confirm Logout",
+      confirmBtn: () {
+        clearUserSession();
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+          (route) => false,
+        );
+      },
+      content: "Are you sure you want to log out?",
     );
   }
 }

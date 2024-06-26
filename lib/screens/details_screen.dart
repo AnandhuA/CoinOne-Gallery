@@ -15,36 +15,42 @@ class DetailsScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ProductDetailsLoadingState) {
-            return GridView.builder(
-              itemCount: 10,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 5,
-                childAspectRatio: 0.65,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: GridView.builder(
+                itemCount: 10,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 0.65,
+                ),
+                itemBuilder: (context, index) {
+                  return const ShimmerProductTileWidget();
+                },
               ),
-              itemBuilder: (context, index) {
-                return const ShimmerProductTileWidget();
-              },
             );
           } else if (state is ProductDetailsSuccessState) {
             return state.productList.isEmpty
                 ? const Center(
                     child: Text("No Iteams"),
                   )
-                : GridView.builder(
-                    itemCount: state.productList.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 5,
-                      mainAxisSpacing: 5,
-                      childAspectRatio: 0.65,
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      itemCount: state.productList.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 8,
+                        mainAxisSpacing: 8,
+                        childAspectRatio: 0.65,
+                      ),
+                      itemBuilder: (context, index) {
+                        return ProductTileWidget(
+                            product: state.productList[index]);
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return ProductTileWidget(
-                          product: state.productList[index]);
-                    },
                   );
           } else if (state is ProductDetailsErrorState) {
             return Center(

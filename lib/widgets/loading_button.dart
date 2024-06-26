@@ -1,3 +1,4 @@
+import 'package:coinone_gallery/core/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -12,6 +13,7 @@ class LoadingButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {},
+        style: ElevatedButton.styleFrom(backgroundColor: buttonBgColor),
         child: Lottie.asset(
           "assets/loading.json",
           width: 80,
