@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:coinone_gallery/auth/authentication_functions.dart';
+import 'package:coinone_gallery/auth/shared_perference.dart';
+import 'package:coinone_gallery/widgets/check_box_widget.dart';
 import 'package:flutter/material.dart';
 
 part 'authentication_event.dart';
@@ -24,6 +26,7 @@ class AuthenticationBloc
       password: event.passsword,
     );
     if (responce == "Success") {
+      setUserLoggedin(rememberMe: rememberMe ?? false);
       emit(AuthenticationSuccessState());
     } else {
       emit(AuthenticationErrorState(error: responce));

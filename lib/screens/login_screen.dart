@@ -1,7 +1,9 @@
 import 'package:coinone_gallery/auth/validation.dart';
 import 'package:coinone_gallery/bloc/authentication/authentication_bloc.dart';
 import 'package:coinone_gallery/core/const_size.dart';
+import 'package:coinone_gallery/screens/home_screen.dart';
 import 'package:coinone_gallery/screens/signup_screen.dart';
+import 'package:coinone_gallery/widgets/check_box_widget.dart';
 import 'package:coinone_gallery/widgets/custom_button.dart';
 import 'package:coinone_gallery/widgets/custom_snacbar.dart';
 import 'package:coinone_gallery/widgets/loading_button.dart';
@@ -22,7 +24,7 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(),
       body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
         listener: (context, state) {
-             if (state is AuthenticationErrorState) {
+          if (state is AuthenticationErrorState) {
             customSnackbar(
                 context: context,
                 message: state.error,
@@ -32,6 +34,13 @@ class LoginScreen extends StatelessWidget {
                 context: context,
                 message: "Success",
                 color: Colors.green.shade300);
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+              (route) => false,
+            );
           }
         },
         builder: (context, state) {
@@ -66,6 +75,7 @@ class LoginScreen extends StatelessWidget {
                       suffixIcon: true,
                     ),
                     height15,
+                    const CheckBoxWidget(),
                     state is AuthenticationLoadingState
                         ? const LoadingButton()
                         : CustomButton(
@@ -76,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                                       LoginButtonClickEvent(
                                         email: _emailController.text,
                                         passsword: _passwordController.text,
+                                        
                                       ),
                                     );
                               }
