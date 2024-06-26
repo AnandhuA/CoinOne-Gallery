@@ -29,6 +29,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       obscureText: widget.obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+      
         labelText: widget.labelText,
         suffixIcon: widget.suffixIcon
             ? IconButton(

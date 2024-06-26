@@ -1,3 +1,4 @@
+import 'package:coinone_gallery/core/colors.dart';
 import 'package:flutter/material.dart';
 
 customSnackbar({
@@ -10,7 +11,7 @@ customSnackbar({
       content: Text(
         message,
         style: const TextStyle(
-          color: Colors.white,
+          color: whiteColor,
         ),
       ),
       backgroundColor: color,

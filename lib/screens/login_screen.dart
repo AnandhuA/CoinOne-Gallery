@@ -1,5 +1,6 @@
 import 'package:coinone_gallery/auth/validation.dart';
 import 'package:coinone_gallery/bloc/authentication/authentication_bloc.dart';
+import 'package:coinone_gallery/core/colors.dart';
 import 'package:coinone_gallery/core/const_size.dart';
 import 'package:coinone_gallery/screens/home_screen.dart';
 import 'package:coinone_gallery/screens/signup_screen.dart';
@@ -26,21 +27,16 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           if (state is AuthenticationErrorState) {
             customSnackbar(
-                context: context,
-                message: state.error,
-                color: Colors.red.shade400);
+                context: context, message: state.error, color: errorColor);
           } else if (state is AuthenticationSuccessState) {
             customSnackbar(
-                context: context,
-                message: "Success",
-                color: Colors.green.shade300);
+                context: context, message: "Success", color: successColor);
             Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomeScreen(),
-              ),
-              (route) => false,
-            );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomeScreen(),
+                ),
+                (route) => false);
           }
         },
         builder: (context, state) {
@@ -92,9 +88,9 @@ class LoginScreen extends StatelessWidget {
                             },
                           ),
                     height20,
-                     CustomRichText(
+                    CustomRichText(
                       text: "Don't have an account?  ",
-                      linkText: 'SignUp' ,
+                      linkText: 'SignUp',
                       screen: SignupScreen(),
                     ),
                   ],

@@ -27,7 +27,10 @@ class AuthenticationRepo {
     required String password,
   }) async {
     try {
-      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
       return "Success";
     } on FirebaseAuthException catch (e) {
       if (e.code == "invalid-credential") {

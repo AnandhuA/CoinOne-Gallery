@@ -40,20 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ProductLoadingState) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 0.65,
-                ),
-                itemBuilder: (context, index) {
-                  return const ShimmerProductTileWidget();
-                },
-              ),
+            return const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: ShimmerWidget(),
             );
           } else if (state is ProductSuccesState) {
             return state.productModelList.isEmpty

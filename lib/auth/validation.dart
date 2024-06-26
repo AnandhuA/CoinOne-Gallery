@@ -15,10 +15,20 @@ String? validatePassword(String? password) {
   if (password == null || password.isEmpty) {
     return 'Please enter a password.';
   }
-  if (!RegExp(
-          r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d@$!%#?&]{8,}$')
-      .hasMatch(password)) {
-    return "Password: 8+ chars,1 uppercase,1 lowercase,1 number,1 specialCharacter.";
+  if (password.length < 8) {
+    return 'Password must be at least 8 characters long.';
+  }
+  if (!RegExp(r'[A-Z]').hasMatch(password)) {
+    return 'Password must contain at least one uppercase letter.';
+  }
+  if (!RegExp(r'[a-z]').hasMatch(password)) {
+    return 'Password must contain at least one lowercase letter.';
+  }
+  if (!RegExp(r'\d').hasMatch(password)) {
+    return 'Password must contain at least one number.';
+  }
+  if (!RegExp(r'[@$!%#?&]').hasMatch(password)) {
+    return 'At least one special character (@, \$, !, %, #, ?, &).';
   }
   return null;
 }

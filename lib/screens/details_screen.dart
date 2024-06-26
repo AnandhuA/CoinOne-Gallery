@@ -15,21 +15,9 @@ class DetailsScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           if (state is ProductDetailsLoadingState) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: GridView.builder(
-                itemCount: 10,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8,
-                  mainAxisSpacing: 8,
-                  childAspectRatio: 0.65,
-                ),
-                itemBuilder: (context, index) {
-                  return const ShimmerProductTileWidget();
-                },
-              ),
-            );
+            return const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: ShimmerWidget());
           } else if (state is ProductDetailsSuccessState) {
             return state.productList.isEmpty
                 ? const Center(
@@ -48,7 +36,8 @@ class DetailsScreen extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) {
                         return ProductTileWidget(
-                            product: state.productList[index]);
+                          product: state.productList[index],
+                        );
                       },
                     ),
                   );

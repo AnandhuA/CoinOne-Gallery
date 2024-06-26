@@ -41,7 +41,6 @@ class ProductTileWidget extends StatelessWidget {
                   placeholder: (context, url) {
                     return Lottie.asset(
                       "assets/imgLoading.json",
-                  
                     );
                   },
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -50,11 +49,14 @@ class ProductTileWidget extends StatelessWidget {
             ),
           ),
           height10,
-          Text(
-            product.name,
-            style: const TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w500,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              product.name,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           height15
