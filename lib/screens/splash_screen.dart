@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:coinone_gallery/auth/shared_perference.dart';
+import 'package:coinone_gallery/bloc/home/home_bloc.dart';
 import 'package:coinone_gallery/screens/home_screen.dart';
 import 'package:coinone_gallery/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     goToSignup();
+    // featchProductes();
     super.initState();
   }
 
@@ -47,5 +50,9 @@ class _SplashScreenState extends State<SplashScreen> {
             ));
       }
     });
+  }
+
+  void featchProductes() {
+    context.read<HomeBloc>().add(ProductFeatchingEvent());
   }
 }

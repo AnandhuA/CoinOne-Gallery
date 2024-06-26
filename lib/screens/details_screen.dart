@@ -1,33 +1,20 @@
 import 'package:coinone_gallery/bloc/Product/product_detail_bloc.dart';
-import 'package:coinone_gallery/bloc/home/home_bloc.dart';
-import 'package:coinone_gallery/screens/details_screen.dart';
 import 'package:coinone_gallery/widgets/product_tile.dart';
 import 'package:coinone_gallery/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    context.read<HomeBloc>().add(ProductFeatchingEvent());
-    super.initState();
-  }
+class DetailsScreen extends StatelessWidget {
+  const DetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: BlocConsumer<HomeBloc, HomeState>(
+      body: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {},
         builder: (context, state) {
-          if (state is ProductLoadingState) {
+          if (state is ProductDetailsLoadingState) {
             return GridView.builder(
               itemCount: 10,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -40,13 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 return const ShimmerProductTileWidget();
               },
             );
-          } else if (state is ProductSuccesState) {
-            return state.productModelList.isEmpty
+          } else if (state is ProductDetailsSuccessState) {
+            return state.productList.isEmpty
                 ? const Center(
                     child: Text("No Iteams"),
                   )
                 : GridView.builder(
-                    itemCount: state.productModelList.length,
+                    itemCount: state.productList.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -55,27 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       childAspectRatio: 0.65,
                     ),
                     itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          context.read<ProductDetailBloc>().add(
-                                ProductClickEvent(
-                                  product: state.productModelList[index],
-                                ),
-                              );
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const DetailsScreen(),
-                              ));
-                        },
-                        child: ProductTileWidget(
-                          product: state.productModelList[index],
-                        ),
-                      );
-                      //  return ShimmerProductTileWidget();
+                      return ProductTileWidget(
+                          product: state.productList[index]);
                     },
                   );
-          } else if (state is ProductErrorState) {
+          } else if (state is ProductDetailsErrorState) {
             return Center(
               child: Text(state.error),
             );
