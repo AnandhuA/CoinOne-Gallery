@@ -18,7 +18,7 @@ String? validatePassword(String? password) {
   if (!RegExp(
           r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d@$!%#?&]{8,}$')
       .hasMatch(password)) {
-    return 'Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.';
+    return "Password: 8+ chars,1 uppercase,1 lowercase,1 number,1 specialCharacter.";
   }
   return null;
 }
@@ -28,7 +28,6 @@ String? validatePassword(String? password) {
 String? validateName(String? name) {
   if (name == null || name.isEmpty) {
     return 'Please enter a name.';
-  } 
-    return null;
-
+  }
+  return null;
 }
