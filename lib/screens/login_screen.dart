@@ -86,7 +86,6 @@ class LoginScreen extends StatelessWidget {
                                       LoginButtonClickEvent(
                                         email: _emailController.text,
                                         passsword: _passwordController.text,
-                                        
                                       ),
                                     );
                               }
@@ -97,12 +96,13 @@ class LoginScreen extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           text: "Don't have an account?  ",
+                          style: TextStyle(color: Colors.grey),
                           children: <TextSpan>[
                             TextSpan(
                               text: 'SignUp',
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   Navigator.pushReplacement(

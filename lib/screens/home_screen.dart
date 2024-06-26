@@ -1,6 +1,9 @@
+import 'package:coinone_gallery/auth/shared_perference.dart';
 import 'package:coinone_gallery/bloc/Product/product_detail_bloc.dart';
 import 'package:coinone_gallery/bloc/home/home_bloc.dart';
 import 'package:coinone_gallery/screens/details_screen.dart';
+import 'package:coinone_gallery/screens/login_screen.dart';
+import 'package:coinone_gallery/widgets/confirmation_diloge.dart';
 import 'package:coinone_gallery/widgets/product_tile.dart';
 import 'package:coinone_gallery/widgets/shimmer_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,29 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () {
+              confirmationDiloge(
+                  context: context,
+                  title: "Confirm Logout",
+                  confirmBtn: () {
+                    clearUserSession();
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+                  content: "Are you sure you want to log out?");
+            },
+            icon: const Icon(Icons.logout),
+          )
+        ],
+      ),
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {},
         builder: (context, state) {

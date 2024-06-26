@@ -32,6 +32,12 @@ class SignupScreen extends StatelessWidget {
                 context: context,
                 message: "Success",
                 color: Colors.green.shade300);
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => LoginScreen(),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -93,12 +99,13 @@ class SignupScreen extends StatelessWidget {
                       child: RichText(
                         text: TextSpan(
                           text: "Already have an account?  ",
+                          style: const TextStyle(color: Colors.grey),
                           children: <TextSpan>[
                             TextSpan(
                               text: 'Login',
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
                                   Navigator.pushReplacement(
